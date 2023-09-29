@@ -1,0 +1,33 @@
+{# 这是子模版，继承的是 layout.html 母版 #}
+
+
+{% extends 'layout.html' %}     {# 这是是引用的模版文件 #}
+{% extends 'app01/header.html' %}       {# 这是下面 include 使用的引用 #}
+
+{% block body %}
+    {#  把这里的 block body 内容塞到引用过来的母版里  #}
+    <h2 style="color: red"><a href={{ url }}>详细内容</a></h2>
+    <h3 style="color:greenyellow">{{ info3 }}</h3>
+
+
+    {#  相当于将 header.html 文件的内容替换到这个位置  #}
+    {#  一般用于对某个相同的片段复用  #}
+    {#  这里先把 block body 和母版嵌合，然后母版再来识别 include #}
+    {#  inclusion_tag 是先渲染好的然后返回的  #}
+    {% include "app01/header.html" %}
+
+    <p>{{ info1 }}</p>
+
+    {# 如果上面的形式不想被渲染 #}
+    {% verbatim %}
+        <p>{{ info1 }}</p>
+    {% endverbatim %}
+
+
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block js %}
+{% endblock %}

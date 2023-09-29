@@ -1,0 +1,73 @@
+{% load jp %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+<h1 style="color: red; background: yellow">这是 app01 / templates 中的 index.html{{ n1 }} </h1>
+<ul>
+    {% for e in n2 %}
+        <li>{{ e }}</li>
+    {% endfor %}
+</ul>
+
+<ol>
+    <li>{{ n3.name }}</li>
+    <li>{{ n3.age }}</li>
+    <li>{{ n3.sex }}</li>
+</ol>
+
+<p>以下是循环实现</p>
+<ol>
+    {% for key, value in n3.items %}
+        <li>{{ key }}:{{ value }}</li>
+    {% endfor %}
+</ol>
+<hr/>
+
+<h2>{{ n8|upper }}</h2>
+<h2>{{ n8|myfunc }}</h2>
+<hr/>
+
+<h2>{{ n9 }}</h2>
+<h2>{{ n9|date:"Y-n-d H:i:s" }}</h2>
+<h2>{{ n10 }}</h2>
+<hr/>
+<table border="2"; bgcolor="yellow">
+    {% for row in n11 %}
+    <tr>
+        <td>{{ row.id }}</td>
+        <td>{{ row.name|myfunc }}</td>
+        <td>{{ row.age }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<hr/>
+
+<p>{% mytag1 %}</p>
+<p>{% mytag2 "OOO---" "---XXX"%}</p>    {# 这是@register.simple_tag() #}
+<hr/>
+
+<p>{% xx %}</p>    {# 这是@register.inclusion_tag("") #}
+<hr/>
+
+{% for row in n11 %}
+    {% if row.age|con %}    {# 这是@register.filter #}
+        <h3 style="color: lawngreen">{{ row.name }} {{ row.age }}岁：成年</h3>
+    {% else %}
+        <h3 style="color: red">{{ row.name }} {{ row.age }}岁：未成年</h3>
+    {% endif %}
+{% endfor %}
+<hr/>
+
+{% menu "user" %}   {# 这是@register.inclusion_tag("") #}
+
+</body>
+
+
+<script>
+</script>
+
+</html>
